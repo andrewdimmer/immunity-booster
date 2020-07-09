@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:immunity_booster/Widgets/foodItem.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -104,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            FoodItem(label: "Oranges", category: "Vit. C"),
           ],
         ),
       ),
