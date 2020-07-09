@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:immunity_booster/Classes/FoodObject.dart';
 
 class FoodItem extends StatelessWidget {
-  FoodItem({Key key, this.label, this.category, this.onComplete, this.onSkip})
+  FoodItem({Key key, this.food, this.onComplete, this.onSkip})
       : super(key: key);
 
-  final String label;
-  final String category;
+  final FoodObject food;
   final Function onComplete;
   final Function onSkip;
 
@@ -13,8 +13,8 @@ class FoodItem extends StatelessWidget {
     return (Dismissible(
         child: Card(
           child: ListTile(
-            title: Text(label),
-            subtitle: Text(category),
+            title: Text(food.label),
+            subtitle: Text(food.category),
             trailing: Icon(Icons.drag_handle),
           ),
           elevation: 2,
