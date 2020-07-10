@@ -126,6 +126,17 @@ class _MyHomePageState extends State<MyHomePage> {
               onComplete: _complete,
               onSkip: _skip,
             ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.calendar_today),
+        onPressed: () {
+          newDayDatabaseUpdate().then(
+            (value) => setState(() {
+              list = value;
+            }),
+          );
+        },
+        tooltip: "Reset foods for a new day!",
+      ),
     );
   }
 }
