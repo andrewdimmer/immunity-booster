@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Immunity Boost',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Immunity Boost'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -116,12 +116,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: list == null
           ? loadingWidget("Loading...")
           : FoodList(
+              header: Text(
+                "Boost Your Immune System Today By Eating:",
+                style: TextStyle(fontSize: 32),
+              ),
               list: list,
               handleReorder: _reorderList,
               refreshList: _refreshList,
               onComplete: _complete,
               onSkip: _skip,
             ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.calendar_today),
+        onPressed: () {
+          newDayDatabaseUpdate().then(
+            (value) => setState(() {
+              list = value;
+            }),
+          );
+        },
+        tooltip: "Reset foods for a new day!",
+      ),
     );
   }
 }
