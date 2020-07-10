@@ -50,7 +50,7 @@ That’s what inspired us to build Immunity Booster. Our app helps you keep trac
 
 ## What it does
 
-Immunity Booster is a cross-platform app designed to help you improve your immune system by suggesting healthy foods you should be including in your diet.
+Immunity Booster is a cross-platform app designed to help you improve your immune system by suggesting healthy foods you should be including in your diet. There are 5 main categories of foods that are needed to improve your immune system: Vitamin C rich foods, Vitamin E rich foods, Vitamin B6 rich foods, prebiotic foods and probiotic foods. Our app recommends diverse foods that include these vital nutrients, to ensure that you have them in your diet, and helping you have a stronger immune system.
 
 Through our Alexa Skill, you can use our app to find out what you should be eating, and either eat or skip them, all hands-free. This makes our app a great cooking companion, and allows users to use Immunity Booster without interrupting what they are doing.
 
