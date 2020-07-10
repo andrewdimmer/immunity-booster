@@ -116,6 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: list == null
           ? loadingWidget("Loading...")
           : FoodList(
+              header: Text(
+                "Boost Your Immune System Today By Eating:",
+                style: TextStyle(fontSize: 32),
+              ),
               list: list,
               handleReorder: _reorderList,
               refreshList: _refreshList,
