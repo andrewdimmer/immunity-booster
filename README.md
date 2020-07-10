@@ -38,6 +38,8 @@ By also creating a cross platform app using Flutter, users can check what foods 
 
 ## How we built it
 
+![Tech Stack Image](https://i.imgur.com/lqFVCk5.png)
+
 To begin with, we selected two main platforms for the front end. We built our web/mobile/desktop app in Flutter, and we built our smart home component for Amazon Alexa. These services allow our app to run on pretty much every device that people have, anywhere, so there are no accessibility issues with getting the data. The whole point of the app is to reduce stress, we don’t want the user to always need to come back to a single device to reduce their stress! We also started working with Google Assistant at the end, but we didn’t have enough time to get that fully integrated.
 
 From there, we next built out our database architecture using Google Firestore. This serves as the central connection point for all data throughout the app that is coming in or out from any device or interface. We then built a wide range of central database functions on top of the database as basically our own internal library, so that the database actions are identical regardless of the requesting device.
