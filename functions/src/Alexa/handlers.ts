@@ -34,13 +34,15 @@ const getAlexaResponse = async (type: string, name: string, food: string) => {
     response: {
       outputSpeech: {
         type: "SSML",
-        ssml: "<speak>Welcome to immunity booster, [tagline].</speak>",
+        ssml:
+          "<speak>Welcome to immunity booster, Superfoods to Supercharge your immune system!.</speak>",
       },
       shouldEndSession: false,
       card: {
         type: "Simple",
         title: "LaunchRequest",
-        content: "Welcome to immunity booster, [tagline].",
+        content:
+          "Welcome to immunity booster, Superfoods to Supercharge your immune system!.",
       },
     },
     userAgent: "ask-node/2.3.0 Node/v8.10.0",
@@ -51,33 +53,7 @@ const getAlexaResponse = async (type: string, name: string, food: string) => {
     return AlexaDefaultAnswer;
   } else if (
     type.indexOf("IntentRequest") >= 0 &&
-    name.indexOf("GetNotes") >= 0
-  ) {
-    AlexaDefaultAnswer.response.outputSpeech.ssml =
-      "<speak>" + "Getting your foods. ";
-    AlexaDefaultAnswer.response.card.content = "Getting your foods. \n";
-    return getFoods()
-      .then((foods) => {
-        for (let i = 0; i < 5; i++) {
-          AlexaDefaultAnswer.response.outputSpeech.ssml +=
-            "Food " + (i + 1) + ": " + foods[i].label + ". ";
-          AlexaDefaultAnswer.response.card.content +=
-            "Food " + (i + 1) + ": " + foods[i].label + "\n ";
-        }
-        AlexaDefaultAnswer.response.outputSpeech.ssml += "</speak>";
-        return AlexaDefaultAnswer;
-      })
-      .catch((err) => {
-        console.log(err);
-        AlexaDefaultAnswer.response.outputSpeech.ssml =
-          "<speak>There was an error completing your request. Please try again later.</speak>";
-        AlexaDefaultAnswer.response.card.content =
-          "There was an error completing your request. Please try again later.";
-        return AlexaDefaultAnswer;
-      });
-  } else if (
-    type.indexOf("IntentRequest") >= 0 &&
-    name.indexOf("GetNotes") >= 0
+    name.indexOf("GetFoods") >= 0
   ) {
     AlexaDefaultAnswer.response.outputSpeech.ssml =
       "<speak>" + "Getting your foods. ";
@@ -86,9 +62,9 @@ const getAlexaResponse = async (type: string, name: string, food: string) => {
       .then((foods) => {
         for (let i = 0; i < foods.length; i++) {
           AlexaDefaultAnswer.response.outputSpeech.ssml +=
-            "Food " + (i + 1) + ": " + foods[i].label + ". ";
+            foods[i].category + ": " + foods[i].label + ". ";
           AlexaDefaultAnswer.response.card.content +=
-            "Food " + (i + 1) + ": " + foods[i].label + "\n ";
+            foods[i].category + ": " + foods[i].label + "\n ";
         }
         AlexaDefaultAnswer.response.outputSpeech.ssml += "</speak>";
         return AlexaDefaultAnswer;
@@ -113,9 +89,9 @@ const getAlexaResponse = async (type: string, name: string, food: string) => {
       .then((foods) => {
         for (let i = 0; i < foods.length; i++) {
           AlexaDefaultAnswer.response.outputSpeech.ssml +=
-            "Food " + (i + 1) + ": " + foods[i].label + ". ";
+            foods[i].category + ": " + foods[i].label + ". ";
           AlexaDefaultAnswer.response.card.content +=
-            "Food " + (i + 1) + ": " + foods[i].label + "\n ";
+            foods[i].category + ": " + foods[i].label + "\n ";
         }
         AlexaDefaultAnswer.response.outputSpeech.ssml += "</speak>";
         return AlexaDefaultAnswer;
@@ -133,8 +109,8 @@ const getAlexaResponse = async (type: string, name: string, food: string) => {
     name.indexOf("EatFood") >= 0
   ) {
     return complete(food.replace(/"/g, ""))
-      .then((noteId) => {
-        if (noteId) {
+      .then((replacement) => {
+        if (replacement) {
           AlexaDefaultAnswer.response.outputSpeech.ssml =
             "<speak>" + "Food completed: " + food + "</speak>";
           AlexaDefaultAnswer.response.card.content = "Food completed: " + food;
@@ -159,11 +135,18 @@ const getAlexaResponse = async (type: string, name: string, food: string) => {
     name.indexOf("SkipFood") >= 0
   ) {
     return skip(food.replace(/"/g, ""))
-      .then((noteId) => {
-        if (noteId) {
+      .then((replacement) => {
+        if (replacement) {
           AlexaDefaultAnswer.response.outputSpeech.ssml =
-            "<speak>" + "Food completed: " + food + "</speak>";
-          AlexaDefaultAnswer.response.card.content = "Food completed: " + food;
+            "<speak>" +
+            "Category skipped: " +
+            food +
+            (replacement !== null ? ". Food added: " + replacement.label : "") +
+            "</speak>";
+          AlexaDefaultAnswer.response.card.content =
+            "Category skipped: " +
+            food +
+            (replacement !== null ? ". Food added: " + replacement.label : "");
         } else {
           AlexaDefaultAnswer.response.outputSpeech.ssml =
             "<speak>There was an error adding your note. Please try again later.</speak>";
