@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:immunity_booster/Classes/FoodObject.dart';
+import 'package:immunity_booster/Database/databaseHandlers.dart';
 import 'package:immunity_booster/Pages/foodList.dart';
+import 'package:immunity_booster/Pages/loading.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,10 +55,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<FoodObject> list = [
-    FoodObject(label: "Oranges", category: "Vit. C"),
-    FoodObject(label: "Yogart", category: "Probiotics")
-  ];
+  _MyHomePageState() {
+    _refreshList();
+  }
+
+  List<FoodObject> list;
 
   void _reorderList(int index1, int index2) {
     setState(() {
@@ -70,7 +73,31 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<void> _refreshList() async {}
+  Future<void> _refreshList() async {
+    return getFoodsDatabaseCall().then(
+      (value) => setState(() {
+        list = value;
+      }),
+    );
+  }
+
+  void _complete(FoodObject food) {
+    setState(() {
+      list.remove(food);
+    });
+    completeDatabaseUpate(food.category);
+  }
+
+  void _skip(FoodObject food) {
+    setState(() {
+      list.remove(food);
+    });
+    skipDatabaseUpdate(food.category).then(
+      (value) => setState(() {
+        list.add(value);
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: FoodList(
-        list: list,
-        handleReorder: _reorderList,
-        refreshList: _refreshList,
-      ),
+      body: list == null
+          ? loadingWidget("Loading...")
+          : FoodList(
+              list: list,
+              handleReorder: _reorderList,
+              refreshList: _refreshList,
+              onComplete: _complete,
+              onSkip: _skip,
+            ),
     );
   }
 }

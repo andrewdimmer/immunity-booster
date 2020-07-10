@@ -24,13 +24,13 @@ class FoodItem extends StatelessWidget {
         background: dismissBackground(Colors.green, Colors.black, Icons.check,
             "Completed", MainAxisAlignment.start),
         secondaryBackground: dismissBackground(Colors.red, Colors.black,
-            Icons.delete, "Delete", MainAxisAlignment.end),
+            Icons.close, "Skip", MainAxisAlignment.end),
         direction: DismissDirection.horizontal,
         onDismissed: (direction) {
           if (direction == DismissDirection.startToEnd) {
-            onComplete();
+            onComplete(food);
           } else {
-            onSkip();
+            onSkip(food);
           }
         }));
   }
