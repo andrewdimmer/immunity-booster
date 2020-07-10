@@ -18,7 +18,7 @@ export const newDay = async (): Promise<FoodObject[] | null> => {
             }
           }
           if (!exists) {
-            list.push({ label: getRandomItem(category), category: category });
+            list.push({ label: getRandomItem(category), category });
           }
         }
         return foodRef

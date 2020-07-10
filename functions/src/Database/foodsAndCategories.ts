@@ -1,101 +1,64 @@
 export const categories = [
-  "Vitamin A",
+  "Vitamin B6",
   "Vitamin C",
   "Vitamin E",
-  "Glutathione",
   "Prebiotic",
   "Probiotic",
 ];
 
-const foods = {
-  vitA: [
-    "Dark green leafy vegetables: spinach and chard",
-    "Orange-fleshed sweet potatoes",
-    "Carrots",
-    "Squashes",
-    "Pumpkins",
-    "Animal sources: Liver, eggs",
-    "Red palm oil",
-    "Cod liver oil",
-  ],
-  vitC: [
-    "Citrus fruits (such as lemons, oranges and grapefruits)",
-    "Kiwi fruit",
-    "Strawberries",
-    "Red and green peppers (raw)",
-    "Broccoli (LIGHTLY steamed)",
-    "Brussel sprouts",
-  ],
-  vitE: [
-    "Cashews",
-    "Almonds",
-    "Chickpeas",
-    "Grass-fed meat",
-    "Lentils",
-    "Eggs",
-    "Seeds: hemp, flax, pumpkin or squash seeds (raw)",
-    "Spinach",
-  ],
-  glutathione: [
-    "Avocado",
-    "Garlic",
-    "Cabbage",
-    "Brussel sprouts",
-    "Asparagus",
-    "Spinach",
-  ],
-  prebiotic: [
-    "Chia seeds",
-    "Hemp seeds",
-    "Flax seeds",
-    "Asparagus",
-    "Artichokes",
-  ],
-  probiotic: [
-    "Sauerkraut",
-    "Kimchi",
-    "Probiotic-rich yogurts",
-    "Probiotic-rich drinks – kombucha, kefir water",
-    "Raw dairy kefi",
-  ],
-};
+const b6Foods = ["Chicken", "Salmon", "Tuna", "Trout", "Chickpeas"];
+const cFoods = [
+  "Oranges",
+  "Grapefruits",
+  "Tangerines",
+  "Strawberries",
+  "Kiwifruit",
+  "Red bell peppers",
+  "Brussel sprouts",
+  "Cauliflower",
+];
+const eFoods = [
+  "Almonds",
+  "Peanuts",
+  "Hazelnuts",
+  "Avocado",
+  "Sunflower seeds",
+  "Spinach",
+  "Kale",
+  "Broccoli",
+];
+const preFoods = ["Flaxseeds", "Asparagus", "Garlic", "Onion", "Artichokes"];
+const proFoods = ["Sauerkraut", "Kimchi", "Yogurt", "Kefir"];
+
+const foods = [b6Foods, cFoods, eFoods, preFoods, proFoods];
 
 export declare interface FoodObject {
   label: string;
   category: string;
 }
 
-declare type Categories = keyof typeof foods;
-
-const catConvert = (category: string): Categories => {
+export const getRandomItem = (category: string) => {
   const categoryLower = category.toLowerCase();
-  if (categoryLower.includes("vitamin a")) {
-    return "vitA";
+  if (categoryLower.includes("vitamin b6")) {
+    return b6Foods[Math.floor(Math.random() * b6Foods.length)];
   } else if (categoryLower.includes("vitamin c")) {
-    return "vitC";
+    return cFoods[Math.floor(Math.random() * cFoods.length)];
   } else if (categoryLower.includes("vitamin e")) {
-    return "vitE";
-  } else if (categoryLower.includes("glutathione")) {
-    return "glutathione";
+    return eFoods[Math.floor(Math.random() * eFoods.length)];
   } else if (categoryLower.includes("prebiotic")) {
-    return "prebiotic";
+    return preFoods[Math.floor(Math.random() * preFoods.length)];
   } else if (categoryLower.includes("probiotic")) {
-    return "probiotic";
+    return proFoods[Math.floor(Math.random() * proFoods.length)];
   } else {
     throw new Error("Category Not Found!");
   }
 };
 
-export const getRandomItem = (category: string) =>
-  foods[catConvert(category)][
-    Math.random() * foods[catConvert(category)].length
-  ];
-
 export const foodToCategory = (foodParam: string) => {
-  for (const category in categories) {
-    for (const food in foods[catConvert(category)]) {
+  for (let i = 0; i < foods.length; i++) {
+    for (const food of foods[i]) {
       if (food.toLowerCase().includes(foodParam.toLowerCase())) {
-        return category;
+        return categories[i];
       }
     }
   }
