@@ -3,6 +3,7 @@ import {
   completeFlutter,
   getFoodsFlutter,
   newDayFlutter,
+  reorderFoodsFlutter,
   skipFlutter,
 } from "./flutter/flutterHandlers";
 
@@ -17,3 +18,4 @@ export const get_foods_flutter = getFoodsFlutter;
 export const new_day_flutter = newDayFlutter;
 export const complete_flutter = completeFlutter;
 export const skip_flutter = skipFlutter;
+export const reorder_foods_flutter = reorderFoodsFlutter;

@@ -92,3 +92,33 @@ Future<List<FoodObject>> getFoodsDatabaseCall() async {
     throw Exception('Failed to get foods.');
   }
 }
+
+Future<bool> reorderFoodsDatabaseUpdate(List<FoodObject> list) async {
+  final response = await http.post(
+      'https://us-central1-hackcation2020-gcp.cloudfunctions.net/reorder_foods_flutter',
+      body: '{"list": ' +
+          list
+              .map((item) {
+                return '{"label": "' +
+                    item.label +
+                    '", "category": "' +
+                    item.category +
+                    '"}';
+              })
+              .toList()
+              .toString() +
+          '}');
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return json.decode(response.body) as bool;
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    print(response.statusCode);
+    print(response.reasonPhrase);
+    print(response.body);
+    throw Exception('Failed to get notes.');
+  }
+}

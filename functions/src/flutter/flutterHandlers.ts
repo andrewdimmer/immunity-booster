@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
-import { getFoods, newDay } from "../Database/newDayAndGetData";
 import { complete, skip } from "../Database/completeAndSkip";
+import { getFoods, newDay } from "../Database/newDayAndGetData";
+import { reorderFoods } from "../Database/reorderFoods";
 
 export const getFoodsFlutter = functions.https.onRequest(
   (request, response) => {
@@ -45,3 +46,15 @@ export const skipFlutter = functions.https.onRequest((request, response) => {
       response.status(500).send("Unable to reset day.");
     });
 });
+
+export const reorderFoodsFlutter = functions.https.onRequest(
+  (request, response) => {
+    response.setHeader("Access-Control-Allow-Origin", "*"); // TODO: Make more secure later!
+    reorderFoods(JSON.parse(request.body))
+      .then((status) => response.status(200).send(status))
+      .catch((err) => {
+        console.log(err);
+        response.status(500).send("Unable to reorder foods.");
+      });
+  }
+);
