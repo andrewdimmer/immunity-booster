@@ -1,3 +1,7 @@
+# Immunity Booster
+
+A project created for HackTheLib.
+
 ## Categories we are submitting for:
 
 - Best Overall,
@@ -7,16 +11,32 @@
 - Best Design
 
 ## Video link
+[https://youtu.be/27L9vhVPWjw](https://youtu.be/27L9vhVPWjw)
 
-https://www.youtube.com/watch?v=3IZ01YhV2b4
+## Greeting
 
-##Greeting
 Hello judges!
 
 Thank you for giving your time to judge all the HackTheLib submissions! We really appreciate all you do to make this hackathon possible. We hope you enjoy Immunity Booster, a connected Alexa skill and cross-platform app designed to help people get the right nutrients they need to strengthen their immune system. Bellow, we describe in-depth how we made our project, including how it is scalable for the future, and what we like about the UI/UX design.
 
 Thank you again,
 Nathan and Andrew Dimmer
+
+## Try It Yourself
+
+### Try the Web App
+
+You can try Immunity Booster as a web app anytime at [https://andrewdimmer.github.io/immunity-booster/](https://andrewdimmer.github.io/immunity-booster/).
+
+### Try the Native App
+
+If you already have Flutter installed on your computer, simply clone this repo, then in a command line switch to the `flutter` folder.
+
+Note: We built the app using the `master` channel to support desktop apps. As a result, you may need to run `flutter channel master` to switch into the master channel. This MAY not be required to test the app on either Android or iOS, but we've only used the master channel ourselves. Depending on the stablity, if you want to try a desktop version, you may need to re-run the some of the flutter create commands.
+
+From there, run `flutter devices` to get the deviceId of the device you want to run the flutter app from. This should include your desktop, a web browser, any emulators, and any mobile devices you have plugged in.
+
+Finally, to start the app, run `flutter run -d <deviceId>` to start the app.
 
 ## Inspiration
 
