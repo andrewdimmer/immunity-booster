@@ -2,7 +2,7 @@ import { FoodObject, categories, getRandomItem } from "./foodsAndCategories";
 import { foodRef } from "../config/firebaseConfig";
 import { logReturnEmptyArray } from "../helpers/errorHelpers";
 
-export const newDay = async (): Promise<FoodObject[] | null> => {
+export const newDay = async (): Promise<FoodObject[]> => {
   return foodRef
     .get()
     .then((doc) => {
@@ -33,12 +33,12 @@ export const newDay = async (): Promise<FoodObject[] | null> => {
     .catch(logReturnEmptyArray);
 };
 
-export const getFoods = async (): Promise<FoodObject[] | null> => {
+export const getFoods = async (): Promise<FoodObject[]> => {
   return foodRef
     .get()
     .then((doc) => {
       const data = doc.data();
-      return data ? (data.list as FoodObject[]) : null;
+      return data ? data.list : [];
     })
     .catch(logReturnEmptyArray);
 };
